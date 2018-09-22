@@ -4,11 +4,10 @@ import android.graphics.Color;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
-@TeleOp (name = "SeeColor")
 
+@TeleOp (name = "SeeColor")
 public class SeeColorOpMode extends OpMode {
     private NormalizedColorSensor colorDetector;
 
@@ -23,7 +22,10 @@ public class SeeColorOpMode extends OpMode {
         NormalizedRGBA normalizedColors = getScaledRGBA(colorDetector);
         HsvValues hsvValues = getHsvValues(normalizedColors);
 
-        telemetry.addData("Jessie says", hsvValues.Hue);
+        telemetry.addData("Hue", hsvValues.Hue);
+        telemetry.addData("Value", hsvValues.Value);
+        telemetry.addData("Saturation", hsvValues.Saturation);
+        telemetry.update();
 
         //decide if yellow or white?
     }
