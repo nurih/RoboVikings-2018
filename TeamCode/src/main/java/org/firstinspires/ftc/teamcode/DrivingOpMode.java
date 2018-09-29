@@ -16,10 +16,10 @@ public class DrivingOpMode extends OpMode {
 
     @Override
     public void init() {
-        leftMotor = hardwareMap.get(DcMotor.class, "leftMotor");
+        leftMotor =  RobotPart.leftMotor.getInstance(hardwareMap);
         leftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        rightMotor = hardwareMap.get(DcMotor.class, "rightMotor");
+        rightMotor =RobotPart.rightMotor.getInstance(hardwareMap);
         rightMotor.setDirection(DcMotorSimple.Direction.REVERSE );
 
     }

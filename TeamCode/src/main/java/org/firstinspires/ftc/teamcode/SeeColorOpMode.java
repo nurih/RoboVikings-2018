@@ -7,13 +7,13 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 
-@TeleOp (name = "SeeColor")
+@TeleOp(name = "SeeColor")
 public class SeeColorOpMode extends OpMode {
     private NormalizedColorSensor colorDetector;
 
     @Override
     public void init() {
-        colorDetector = hardwareMap.get(NormalizedColorSensor.class, "colorSensor");
+        colorDetector = RobotPart.colorSensor.getInstance(hardwareMap);
     }
 
     @Override
@@ -25,9 +25,31 @@ public class SeeColorOpMode extends OpMode {
         telemetry.addData("Hue", hsvValues.Hue);
         telemetry.addData("Value", hsvValues.Value);
         telemetry.addData("Saturation", hsvValues.Saturation);
-        telemetry.update();
+
 
         //decide if yellow or white?
+        // if yellow say yellow
+
+        if (hsvValues.Hue >= 32 && hsvValues.Hue <= 54
+                && hsvValues.Saturation >= 0.474
+                && hsvValues.Value >= 0.635) {
+            telemetry.addLine("i see yellow");
+        } else if (hsvValues.Hue >= 120 && hsvValues.Hue <= 160
+                && hsvValues.Saturation >= 0.364
+                && hsvValues.Value >= 0.127) {
+            telemetry.addLine("i see white");
+        } else if (hsvValues.Hue >= 137 && hsvValues.Hue <= 141
+                && hsvValues.Saturation >= 0.372
+                && hsvValues.Value >= 0.2) {
+            telemetry.addLine("i see mat");
+
+        } else {
+            telemetry.addLine("I don't know what color...");
+        }
+
+        // if not yellow and not white say "i don't know"
+        //
+        telemetry.update();
     }
 
     public static NormalizedRGBA getScaledRGBA(NormalizedColorSensor sensor) {
