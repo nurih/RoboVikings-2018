@@ -4,12 +4,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public enum RobotPart {
     leftMotor(DcMotor.class),
     rightMotor(DcMotor.class),
 
-    colorSensor(NormalizedColorSensor.class),;
+    latchArmMotor(DcMotor.class),
+    gateServo(DcMotor.class),
+    brushServo(DcMotor.class),
+
+    colorSensor(NormalizedColorSensor.class),
+
+    latchServo(Servo.class),;
 
     private Class<? extends HardwareDevice> _partType;
 
