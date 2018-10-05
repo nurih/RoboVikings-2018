@@ -10,7 +10,7 @@ public enum RobotPart {
     leftMotor(DcMotor.class),
     rightMotor(DcMotor.class),
 
-    latchArmMotor(DcMotor.class),
+    latchMotor(DcMotor.class),
     gateServo(DcMotor.class),
     brushServo(DcMotor.class),
 

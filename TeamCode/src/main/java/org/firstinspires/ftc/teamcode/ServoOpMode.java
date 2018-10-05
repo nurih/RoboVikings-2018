@@ -1,31 +1,38 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "Servo Testing")
-public class ServoOpMode extends LinearOpMode {
-    Servo latchServo;
+@Autonomous(name = "Brush Servo Testing")
+public class ServoOpMode extends OpMode {
+    Servo brushServo;
+
 
     @Override
-    public void runOpMode() throws InterruptedException {
-        latchServo = RobotPart.latchServo.getInstance(hardwareMap);
-        waitForStart();
-        // move to start
-
-        moveAndWait(0);
-        moveAndWait(0.5);
-
-        moveAndWait(0.25);
-
-        moveAndWait(1.0);
+    public void init() {
+        brushServo = RobotPart.brushServo.getInstance(hardwareMap);
     }
 
-    private void moveAndWait(double position) {
-
-        latchServo.setPosition(position);
-
-        sleep(2000);
+    @Override
+    public void loop() {
+        // check if right button pressed
+        if (gamepad1.right_bumper) {
+            moveServo(1);
+        }
+        // check if left button pressed
+        if (gamepad1.left_bumper) {
+            moveServo(-1);
+        }
+        // if no button pressed.
     }
+
+
+    private void moveServo(double delta) {
+        double currentPostion = brushServo.getPosition();
+        double targetPostion = currentPostion + delta;
+        brushServo.setPosition(targetPostion);
+    }
+
+
 }

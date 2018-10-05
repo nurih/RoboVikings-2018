@@ -19,7 +19,7 @@ public class TestEncoderOpMode extends LinearOpMode {
         waitForStart();
 
         // set up the latch motor.
-        DcMotor latchArmMotor = RobotPart.latchArmMotor.getInstance(hardwareMap);
+        DcMotor latchArmMotor = RobotPart.latchMotor.getInstance(hardwareMap);
         latchArmMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         latchArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         latchArmMotor.setPower(MOVE_POWER);
