@@ -9,15 +9,19 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class Autonmous1OpMode extends LinearOpMode {
     private static final int LATCH_LOWERING_TICKS = 1000;
     DcMotor latchMotor;
+    AutonmousDrive drive;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        latchMotor = getLatchMotor();
+
 
         waitForStart();
+        drive = new AutonmousDrive(hardwareMap, telemetry);
+
+        latchMotor = getLatchMotor();
 
         // run it a few rotations (how many)
-        int targetPosition = latchMotor.getCurrentPosition()+ LATCH_LOWERING_TICKS;
+        int targetPosition = latchMotor.getCurrentPosition() + LATCH_LOWERING_TICKS;
 
         telemetry.addData("Target Position is ", targetPosition);
         telemetry.update();
@@ -26,6 +30,18 @@ public class Autonmous1OpMode extends LinearOpMode {
 
         // stop
         // drive
+
+        // go to position 1
+        drive.driveStraight(400);
+        telemetry.update();
+
+        sleep(3000);
+// turn 90 degrees
+        drive.turn(90);
+        telemetry.addLine("Done turning");
+        telemetry.update();
+        sleep(3000);
+
     }
 
     private DcMotor getLatchMotor() {

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name = "Driving Test 1")
+@TeleOp(name = "Driving Test")
 public class DrivingOpMode extends OpMode {
 
 
@@ -35,8 +35,8 @@ public class DrivingOpMode extends OpMode {
         brushServo = RobotPart.brushServo.getInstance(hardwareMap);
         brushServo.setPosition(BRUSH_STOP);
         // get brush Servo
-//        gateServo = RobotPart.gateServo.getInstance(hardwareMap);
-//        gateServo.setPosition(GATE_CLOSED_POSITION);
+       gateServo = RobotPart.gateServo.getInstance(hardwareMap);
+       gateServo.setPosition(GATE_CLOSED_POSITION);
     }
 
     @Override

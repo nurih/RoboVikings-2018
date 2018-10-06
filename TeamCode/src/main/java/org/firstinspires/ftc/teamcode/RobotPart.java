@@ -11,12 +11,13 @@ public enum RobotPart {
     rightMotor(DcMotor.class),
 
     latchMotor(DcMotor.class),
-    gateServo(DcMotor.class),
-    brushServo(DcMotor.class),
+
+    gateServo(Servo.class),
+
+    brushServo(Servo.class),
 
     colorSensor(NormalizedColorSensor.class),
-
-    latchServo(Servo.class),;
+    ;
 
     private Class<? extends HardwareDevice> _partType;
 
