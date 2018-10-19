@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -10,12 +9,12 @@ public class ServoOpMode extends OpMode {
     private static final double GATE_CLOSED =  0.5;
     private static final double GATE_OPEN = 0;
     double targetPostion = 0;
-    Servo brushServo;
+    Servo brushMotor;
     Servo gateServo;
 
     @Override
     public void init() {
-        brushServo = RobotPart.brushServo.getInstance(hardwareMap);
+        brushMotor = RobotPart.brushMotor.getInstance(hardwareMap);
         gateServo = RobotPart.gateServo.getInstance(hardwareMap);
         telemetry.addLine("Got two instances");
         gateServo.setPosition(GATE_CLOSED);
@@ -55,7 +54,7 @@ public class ServoOpMode extends OpMode {
 
 
     private void moveServo(double value) {
-        brushServo.setPosition(value);
+        brushMotor.setPosition(value);
         telemetry.addData("Target position", value);
     }
 }

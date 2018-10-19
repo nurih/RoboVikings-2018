@@ -10,14 +10,18 @@ public enum RobotPart {
     leftMotor(DcMotor.class),
     rightMotor(DcMotor.class),
 
+    // the one that lowers us from lander
     latchMotor(DcMotor.class),
 
     gateServo(Servo.class),
 
-    brushServo(Servo.class),
+    brushMotor(DcMotor.class),
 
-    colorSensor(NormalizedColorSensor.class),
-    ;
+    armExtenderMotor(DcMotor.class),
+
+    armLiftingMotor(DcMotor.class),
+
+    colorSensor(NormalizedColorSensor.class),;
 
     private Class<? extends HardwareDevice> _partType;
 
