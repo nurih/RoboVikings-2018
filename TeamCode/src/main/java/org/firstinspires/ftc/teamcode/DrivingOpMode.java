@@ -37,6 +37,7 @@ public class DrivingOpMode extends OpMode {
 
         // get intake Servo
         brushMotor = RobotPart.brushMotor.getInstance(hardwareMap);
+        brushMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         brushMotor.setPower(BRUSH_STOP);
         // get brush Servo
         gateServo = RobotPart.gateServo.getInstance(hardwareMap);
