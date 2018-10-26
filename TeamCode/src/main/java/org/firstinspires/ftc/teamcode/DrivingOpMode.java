@@ -17,8 +17,7 @@ public class DrivingOpMode extends OpMode {
     private static final double BRUSH_GO = 1.0;
     public static final double LATCH_POWER = 0.5;
 
-    private float leftMotorPower;
-    private float rightMotorPower;
+
     private DcMotor leftMotor;
     private DcMotor rightMotor;
     private Servo gateServo;
@@ -37,7 +36,7 @@ public class DrivingOpMode extends OpMode {
 
         // get intake Servo
         brushMotor = RobotPart.brushMotor.getInstance(hardwareMap);
-        brushMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        brushMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         brushMotor.setPower(BRUSH_STOP);
         // get brush Servo
         gateServo = RobotPart.gateServo.getInstance(hardwareMap);
@@ -100,23 +99,22 @@ public class DrivingOpMode extends OpMode {
     }
 
     private void doDriving() {
-        leftMotorPower = gamepad1.left_stick_y;
 
-        leftMotor.setPower(leftMotorPower);
+        leftMotor.setPower(gamepad1.left_stick_y);
 
-        rightMotorPower = gamepad1.right_stick_y;
-
-        rightMotor.setPower(rightMotorPower);
+        rightMotor.setPower(gamepad1.right_stick_y);
 
 
     }
 
     private void doExtend() {
+
         armExtenderMotor.setPower((gamepad2.left_stick_y));
     }
 
     private void doLift() {
-        armLiftingMotor.setPower(gamepad2.right_stick_y);
+        // maximum power not 1 because it's too much
+        armLiftingMotor.setPower(gamepad2.right_stick_y/2.0);
     }
 
 }
