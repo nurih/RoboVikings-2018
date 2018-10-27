@@ -8,7 +8,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 class AutonmousDrive {
     private static final int DEGREES_PER_TICK = 9600 / 360;
-    private static final double CENTIMETER_PER_TICK = 0.1;
+    private static final double TICKS_PER_CENTIMETER = 10.42;
+
     DcMotor leftMotor;
     DcMotor rightMotor;
     private Telemetry telemetry;
@@ -26,15 +27,18 @@ class AutonmousDrive {
 
     public void driveStraight(int centimeters) {
         telemetry.addData("Driving Streight (cm)", centimeters);
+
         int ticksToMove = (int) centimeterToTicks(centimeters);
         moveToPosition(leftMotor, ticksToMove);
         moveToPosition(rightMotor, ticksToMove);
+        waitForMotorsToFinish(leftMotor, rightMotor);
     }
 
     private void moveToPosition(DcMotor motor, int ticksToMove) {
 
         int currentPosition = motor.getCurrentPosition();
         telemetry.addData("Ticks to move", ticksToMove);
+
         motor.setTargetPosition(currentPosition + ticksToMove);
 
     }
@@ -44,13 +48,22 @@ class AutonmousDrive {
 
         int howFar = degreesToTicks(degrees);
         telemetry.addData("Turning (ticks)", howFar);
+
         // run right  motor
         moveToPosition(rightMotor, howFar);
         moveToPosition(leftMotor, -howFar);
+
+        waitForMotorsToFinish(leftMotor, rightMotor);
+    }
+
+    private void waitForMotorsToFinish(DcMotor motor1, DcMotor motor2) {
+        while (motor1.isBusy() || motor2.isBusy()){
+            // spin wait
+        }
     }
 
     private double centimeterToTicks(int centimeters) {
-        return centimeters + CENTIMETER_PER_TICK;
+        return centimeters * TICKS_PER_CENTIMETER;
     }
 
     private int degreesToTicks(int degrees) {
@@ -59,6 +72,7 @@ class AutonmousDrive {
     }
 
     private void setupMotor(DcMotor motor, DcMotorSimple.Direction direction) {
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor.setDirection(direction);
         motor.setPower(.5);

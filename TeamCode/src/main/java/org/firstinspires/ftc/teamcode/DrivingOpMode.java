@@ -42,7 +42,7 @@ public class DrivingOpMode extends OpMode {
         gateServo = RobotPart.gateServo.getInstance(hardwareMap);
         gateServo.setPosition(GATE_CLOSED_POSITION);
 
-        latchMotor = RobotPart.latchMotor.getInstance(hardwareMap);
+        latchMotor = RobotPart.latchLiftMotor.getInstance(hardwareMap);
         latchMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         latchMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 

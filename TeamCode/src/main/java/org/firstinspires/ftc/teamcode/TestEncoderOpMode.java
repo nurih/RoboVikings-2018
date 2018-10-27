@@ -5,8 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 @Autonomous(name = "Test Motor Encoder")
 public class TestEncoderOpMode extends LinearOpMode {
 
@@ -15,32 +13,15 @@ public class TestEncoderOpMode extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-
+        AutonmousDrive drive = new AutonmousDrive(hardwareMap,telemetry);
         waitForStart();
 
-        // set up the latch motor.
-        DcMotor latchArmMotor = RobotPart.latchMotor.getInstance(hardwareMap);
-        latchArmMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        latchArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        latchArmMotor.setPower(MOVE_POWER);
+        drive.driveStraight(100);
 
-        // set up encoder
+        telemetry.addLine("done");
 
-        // roll forward 100 "ticks"
-
-        // ask encoder where it is now (initialEncoderPosition)
-        int latchArmMotorPosition = latchArmMotor.getCurrentPosition();
-
-
-        latchArmMotor.setTargetPosition(latchArmMotorPosition + 3000);
-
-        do {
-            telemetry.addData("Position", latchArmMotor.getCurrentPosition());
-            telemetry.update();
-        } while (latchArmMotor.isBusy());
-
-        telemetry.addData("Position", latchArmMotor.getCurrentPosition());
-        telemetry.addLine("Done");
         telemetry.update();
+        sleep(10000);
+
     }
 }
