@@ -22,9 +22,10 @@ public class DrivingOpMode extends OpMode {
     private DcMotor rightMotor;
     private Servo gateServo;
     private DcMotor brushMotor;
-    private DcMotor latchMotor;
+    private DcMotor latchLiftMotor;
     private DcMotor armExtenderMotor;
     private DcMotor armLiftingMotor;
+    private DcMotor latchLowerMotor;
 
     @Override
     public void init() {
@@ -42,9 +43,13 @@ public class DrivingOpMode extends OpMode {
         gateServo = RobotPart.gateServo.getInstance(hardwareMap);
         gateServo.setPosition(GATE_CLOSED_POSITION);
 
-        latchMotor = RobotPart.latchLiftMotor.getInstance(hardwareMap);
-        latchMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        latchMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        latchLiftMotor = RobotPart.latchLiftMotor.getInstance(hardwareMap);
+        latchLiftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        latchLiftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        latchLowerMotor = RobotPart.latchLowerMotor.getInstance(hardwareMap);
+        latchLowerMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        latchLowerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         armExtenderMotor = RobotPart.armExtenderMotor.getInstance(hardwareMap);
         armExtenderMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -64,20 +69,32 @@ public class DrivingOpMode extends OpMode {
 
         doGateOpening();
 
-        doLatchMotor();
+        doLatchLiftMotor();
+        doLatchLowerMotor();
 
         doExtend();
 
         doLift();
     }
 
-    private void doLatchMotor() {
+    private void doLatchLiftMotor() {
         if (gamepad2.right_bumper) {
-            latchMotor.setPower(LATCH_POWER);
+            latchLiftMotor.setPower(LATCH_POWER);
         } else if (gamepad2.left_bumper) {
-            latchMotor.setPower(-LATCH_POWER);
+            latchLiftMotor.setPower(-LATCH_POWER);
         } else {
-            latchMotor.setPower(0);
+            latchLiftMotor.setPower(0);
+        }
+
+    }
+
+    private void doLatchLowerMotor() {
+        if (gamepad2.a) {
+            latchLiftMotor.setPower(LATCH_POWER);
+        } else if (gamepad2.b) {
+            latchLiftMotor.setPower(-LATCH_POWER);
+        } else {
+            latchLiftMotor.setPower(0);
         }
 
     }
@@ -94,7 +111,8 @@ public class DrivingOpMode extends OpMode {
         if (gamepad1.left_bumper) {
             brushMotor.setPower(BRUSH_GO);
         } else {
-            brushMotor.setPower(BRUSH_STOP);;
+            brushMotor.setPower(BRUSH_STOP);
+            ;
         }
     }
 
@@ -114,7 +132,7 @@ public class DrivingOpMode extends OpMode {
 
     private void doLift() {
         // maximum power not 1 because it's too much
-        armLiftingMotor.setPower(gamepad2.right_stick_y/2.0);
+        armLiftingMotor.setPower(gamepad2.right_stick_y / 2.0);
     }
 
 }

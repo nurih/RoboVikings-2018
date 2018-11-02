@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 class AutonmousDrive {
-    private static final int DEGREES_PER_TICK = 9600 / 360;
+    private static final double TICKS_PER_DEGREE = 10;
     private static final double TICKS_PER_CENTIMETER = 10.42;
 
     DcMotor leftMotor;
@@ -22,7 +22,7 @@ class AutonmousDrive {
         setupMotor(rightMotor, DcMotorSimple.Direction.FORWARD);
 
         this.telemetry = telemetry;
-        telemetry.addData("Degrees per tick", DEGREES_PER_TICK);
+        telemetry.addData("Ticks per degree", TICKS_PER_DEGREE);
     }
 
     public void driveStraight(int centimeters) {
@@ -67,8 +67,8 @@ class AutonmousDrive {
     }
 
     private int degreesToTicks(int degrees) {
-        int ticks = degrees * DEGREES_PER_TICK;
-        return ticks;
+        double ticks = degrees * TICKS_PER_DEGREE;
+        return (int)ticks;
     }
 
     private void setupMotor(DcMotor motor, DcMotorSimple.Direction direction) {

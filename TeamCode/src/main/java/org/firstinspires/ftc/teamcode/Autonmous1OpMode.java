@@ -36,11 +36,11 @@ public class Autonmous1OpMode extends LinearOpMode {
         sleep(3000);
 
         drive.driveStraight(162);
-//        sleep(3000);
-//        drive.turn(90);
-//        sleep(3000);
-//        drive.driveStraight(177);
-//        sleep(3000);
+        sleep(3000);
+        drive.turn(90);
+        sleep(3000);
+        drive.driveStraight(177);
+        sleep(3000);
     }
 
 
