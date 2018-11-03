@@ -21,6 +21,7 @@ public class DrivingOpMode extends OpMode {
     private DcMotor leftMotor;
     private DcMotor rightMotor;
     private Servo gateServo;
+    private LatchLock latchLock;
     private DcMotor brushMotor;
     private DcMotor latchLiftMotor;
     private DcMotor armExtenderMotor;
@@ -35,11 +36,12 @@ public class DrivingOpMode extends OpMode {
         rightMotor = RobotPart.rightMotor.getInstance(hardwareMap);
         rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        // get intake Servo
+        // get intake Motor
         brushMotor = RobotPart.brushMotor.getInstance(hardwareMap);
         brushMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         brushMotor.setPower(BRUSH_STOP);
-        // get brush Servo
+
+        // gate Servo
         gateServo = RobotPart.gateServo.getInstance(hardwareMap);
         gateServo.setPosition(GATE_CLOSED_POSITION);
 
@@ -58,6 +60,9 @@ public class DrivingOpMode extends OpMode {
         armLiftingMotor = RobotPart.armLiftingMotor.getInstance(hardwareMap);
         armLiftingMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         armLiftingMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        // latch Lock servo
+        latchLock = new LatchLock(hardwareMap);
     }
 
     @Override
@@ -72,9 +77,9 @@ public class DrivingOpMode extends OpMode {
         doLatchLiftMotor();
         doLatchLowerMotor();
 
-        doExtend();
+        doArmExtend();
 
-        doLift();
+        doArmLift();
     }
 
     private void doLatchLiftMotor() {
@@ -90,11 +95,11 @@ public class DrivingOpMode extends OpMode {
 
     private void doLatchLowerMotor() {
         if (gamepad2.a) {
-            latchLiftMotor.setPower(LATCH_POWER);
+            latchLowerMotor.setPower(LATCH_POWER);
         } else if (gamepad2.b) {
-            latchLiftMotor.setPower(-LATCH_POWER);
+            latchLowerMotor.setPower(-LATCH_POWER);
         } else {
-            latchLiftMotor.setPower(0);
+            latchLowerMotor.setPower(0);
         }
 
     }
@@ -125,14 +130,23 @@ public class DrivingOpMode extends OpMode {
 
     }
 
-    private void doExtend() {
+    private void doArmExtend() {
 
-        armExtenderMotor.setPower((gamepad2.left_stick_y));
+        armExtenderMotor.setPower(gamepad2.left_stick_y);
     }
 
-    private void doLift() {
+    private void doArmLift() {
         // maximum power not 1 because it's too much
-        armLiftingMotor.setPower(gamepad2.right_stick_y / 2.0);
+        armLiftingMotor.setPower(-gamepad2.right_stick_y / 2.0);
+    }
+
+    private void doLatchLock(){
+        if(gamepad1.a){
+            latchLock.open();
+        }
+        if(gamepad1.a){
+            latchLock.close();
+        }
     }
 
 }
