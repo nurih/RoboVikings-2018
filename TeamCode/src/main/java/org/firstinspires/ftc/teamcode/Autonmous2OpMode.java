@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "Autonomous2JustDrop")
+@Autonomous(name = "Autonomous 2 JustDrop")
 public class Autonmous2OpMode extends LinearOpMode {
     private static final int LATCH_LOWERING_TICKS = 1000;
     Servo latchLockServo;
