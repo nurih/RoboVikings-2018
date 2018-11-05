@@ -18,6 +18,7 @@ public class Autonmous3OpMode extends LinearOpMode {
         drive = new AutonmousDrive(hardwareMap, telemetry);
         latchLockServo = getLatchLockServo();
         latchLowerMotor = RobotPart.latchLowerMotor.getInstance(hardwareMap);
+        latchLowerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         waitForStart();
 
@@ -31,7 +32,9 @@ public class Autonmous3OpMode extends LinearOpMode {
         do {
             now = getRuntime();
             latchLowerMotor.setPower(-1);
-        } while (getRuntime() < now + 1.5);
+        } while (getRuntime() < now + 0.5);
+
+        latchLowerMotor.setPower(0);
 
         drive.turn(45);
         telemetry.addLine("turned");
