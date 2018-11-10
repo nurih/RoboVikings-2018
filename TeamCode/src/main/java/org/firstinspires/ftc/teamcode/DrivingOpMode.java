@@ -21,12 +21,11 @@ public class DrivingOpMode extends OpMode {
     private DcMotor leftMotor;
     private DcMotor rightMotor;
     private Servo gateServo;
-    private LatchLock latchLock;
-    private DcMotor brushMotor;
     private DcMotor latchLiftMotor;
     private DcMotor armExtenderMotor;
     private DcMotor armLiftingMotor;
     private DcMotor latchLowerMotor;
+    private DcMotor brushMotor;
 
     @Override
     public void init() {
@@ -61,8 +60,7 @@ public class DrivingOpMode extends OpMode {
         armLiftingMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         armLiftingMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        // latch Lock servo
-        latchLock = new LatchLock(hardwareMap);
+
     }
 
     @Override
@@ -140,16 +138,11 @@ public class DrivingOpMode extends OpMode {
         armLiftingMotor.setPower(-gamepad2.right_stick_y / 2.0);
     }
 
-    private void doLatchLock(){
-        if(gamepad1.a){
-            latchLock.open();
-        }
-        if(gamepad1.a){
-            latchLock.close();
-        }
-    }
 
-}
+        }
+
+
+
 
 
 

@@ -11,24 +11,22 @@ public class Autonmous1OpMode extends LinearOpMode {
     private static final int LATCH_LOWERING_TICKS = 1000;
     DcMotor latchLiftMotor;
     DcMotor latchLowerMotor;
-    Servo latchLockServo;
-    AutonmousDrive drive;
+
+    AutonomousDrive drive;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-
         waitForStart();
 
-        drive = new AutonmousDrive(hardwareMap, telemetry);
+        drive = new AutonomousDrive(hardwareMap, telemetry);
 
         latchLiftMotor = getLatchLiftMotor();
         latchLowerMotor = getLatchLowerMotor();
-        latchLockServo = getLatchLockServo();
 
 
-        // unlock the latch
-        latchLockServo.setPosition(0.5);
+
+
         sleep(3000);
         telemetry.addLine("turning");
         drive.turn(45);
@@ -45,11 +43,7 @@ public class Autonmous1OpMode extends LinearOpMode {
 
 
 
-    private Servo getLatchLockServo() {
-        latchLockServo = RobotPart.latchLockServo.getInstance(hardwareMap);
-        latchLockServo.setPosition(0);
-        return latchLockServo;
-    }
+
 
     private DcMotor getLatchLiftMotor() {
         DcMotor motor = RobotPart.latchLiftMotor.getInstance(hardwareMap);

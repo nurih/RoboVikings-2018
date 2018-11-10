@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-class AutonmousDrive {
+class AutonomousDrive {
     private static final double TICKS_PER_DEGREE = 10;
     private static final double TICKS_PER_CENTIMETER = 10.42;
 
@@ -15,7 +14,7 @@ class AutonmousDrive {
     DcMotor rightMotor;
     private Telemetry telemetry;
 
-    public AutonmousDrive(HardwareMap hardwareMap, Telemetry telemetry) {
+    public AutonomousDrive(HardwareMap hardwareMap, Telemetry telemetry) {
         leftMotor = RobotPart.leftMotor.getInstance(hardwareMap);
         rightMotor = RobotPart.rightMotor.getInstance(hardwareMap);
 
@@ -73,11 +72,10 @@ class AutonmousDrive {
     }
 
     private void setupMotor(DcMotor motor, DcMotorSimple.Direction direction) {
-        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor.setDirection(direction);
-        motor.setPower(.5);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor.setPower(.5);
 
     }
 }

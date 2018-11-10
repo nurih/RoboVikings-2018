@@ -13,7 +13,7 @@ public enum RobotPart {
     // the one that lowers us from lander
     latchLiftMotor(DcMotor.class),
     latchLowerMotor(DcMotor.class),
-    latchLockServo(Servo.class),
+
 
     gateServo(Servo.class),
 

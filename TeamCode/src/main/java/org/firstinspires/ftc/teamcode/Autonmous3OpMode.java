@@ -8,22 +8,20 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Autonomous(name = "Autonomous 3 Unwind Motor")
 public class Autonmous3OpMode extends LinearOpMode {
     private static final int LATCH_LOWERING_TICKS = 1000;
-    Servo latchLockServo;
-    AutonmousDrive drive;
+
+    AutonomousDrive drive;
     private DcMotor latchLowerMotor;
 
     @Override
     public void runOpMode() throws InterruptedException {
+        waitForStart();
 
-        drive = new AutonmousDrive(hardwareMap, telemetry);
-        latchLockServo = getLatchLockServo();
+        drive = new AutonomousDrive(hardwareMap, telemetry);
+
         latchLowerMotor = RobotPart.latchLowerMotor.getInstance(hardwareMap);
         latchLowerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        waitForStart();
 
-        // unlock the latch
-        latchLockServo.setPosition(0.5);
         sleep(3000);
         telemetry.addLine("turning");
 
@@ -42,11 +40,8 @@ public class Autonmous3OpMode extends LinearOpMode {
     }
 
 
-    private Servo getLatchLockServo() {
-        latchLockServo = RobotPart.latchLockServo.getInstance(hardwareMap);
-        latchLockServo.setPosition(0);
-        return latchLockServo;
+
     }
 
 
-}
+
