@@ -4,14 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "Driving Test")
 public class DrivingOpMode extends OpMode {
 
-
-    public static final double GATE_CLOSED_POSITION = .5;
-    private static final double GATE_OPEN_POSITION = 0;
 
     private static final double BRUSH_STOP = 0;
     private static final double BRUSH_GO = 1.0;
@@ -20,7 +16,6 @@ public class DrivingOpMode extends OpMode {
 
     private DcMotor leftMotor;
     private DcMotor rightMotor;
-    private Servo gateServo;
     private DcMotor latchLiftMotor;
     private DcMotor armExtenderMotor;
     private DcMotor armLiftingMotor;
@@ -40,9 +35,6 @@ public class DrivingOpMode extends OpMode {
         brushMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         brushMotor.setPower(BRUSH_STOP);
 
-        // gate Servo
-        gateServo = RobotPart.gateServo.getInstance(hardwareMap);
-        gateServo.setPosition(GATE_CLOSED_POSITION);
 
         latchLiftMotor = RobotPart.latchLiftMotor.getInstance(hardwareMap);
         latchLiftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -70,7 +62,6 @@ public class DrivingOpMode extends OpMode {
 
         doBrush();
 
-        doGateOpening();
 
         doLatchLiftMotor();
         doLatchLowerMotor();
@@ -102,16 +93,9 @@ public class DrivingOpMode extends OpMode {
 
     }
 
-    private void doGateOpening() {
-        if (gamepad1.right_bumper) {
-            gateServo.setPosition(GATE_OPEN_POSITION);
-        } else {
-            gateServo.setPosition(GATE_CLOSED_POSITION);
-        }
-    }
 
     private void doBrush() {
-        if (gamepad1.left_bumper) {
+        if (gamepad2.left_bumper) {
             brushMotor.setPower(BRUSH_GO);
         } else {
             brushMotor.setPower(BRUSH_STOP);
@@ -139,7 +123,7 @@ public class DrivingOpMode extends OpMode {
     }
 
 
-        }
+}
 
 
 
