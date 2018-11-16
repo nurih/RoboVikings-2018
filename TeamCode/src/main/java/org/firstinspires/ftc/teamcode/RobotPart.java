@@ -15,7 +15,6 @@ public enum RobotPart {
     latchLowerMotor(DcMotor.class),
 
 
-    gateServo(Servo.class),
 
     brushMotor(DcMotor.class),
 

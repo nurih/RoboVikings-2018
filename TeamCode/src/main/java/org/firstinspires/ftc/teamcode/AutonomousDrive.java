@@ -57,7 +57,7 @@ class AutonomousDrive {
     }
 
     private void waitForMotorsToFinish(DcMotor motor1, DcMotor motor2) {
-        while (motor1.isBusy() || motor2.isBusy()){
+        while (motor1.isBusy() || motor2.isBusy()) {
             // spin wait
         }
     }
@@ -68,14 +68,14 @@ class AutonomousDrive {
 
     private int degreesToTicks(int degrees) {
         double ticks = degrees * TICKS_PER_DEGREE;
-        return (int)ticks;
+        return (int) ticks;
     }
 
     private void setupMotor(DcMotor motor, DcMotorSimple.Direction direction) {
+        motor.setPower(0);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor.setDirection(direction);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor.setPower(.5);
-
     }
 }
