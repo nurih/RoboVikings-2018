@@ -81,7 +81,7 @@ public class DrivingOpMode extends OpMode {
 
 
     private void doBrush() {
-        if (gamepad2.left_bumper) {
+        if (gamepad2.right_bumper) {
             brushMotor.setPower(BRUSH_GO);
         } else {
             brushMotor.setPower(BRUSH_STOP);
@@ -100,12 +100,12 @@ public class DrivingOpMode extends OpMode {
 
     private void doArmExtend() {
 
-        armExtenderMotor.setPower(gamepad2.left_stick_y);
+        armExtenderMotor.setPower(gamepad2.right_stick_y);
     }
 
     private void doArmLift() {
         // maximum power not 1 because it's too much
-        armLiftingMotor.setPower(-gamepad2.right_stick_y / 2.0);
+        armLiftingMotor.setPower(-gamepad2.left_stick_y / 2.0);
     }
 
 
