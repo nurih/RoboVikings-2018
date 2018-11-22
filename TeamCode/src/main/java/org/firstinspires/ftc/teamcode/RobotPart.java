@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
+import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 public enum RobotPart {
     leftMotor(DcMotor.class),
@@ -20,7 +22,9 @@ public enum RobotPart {
 
     brushMotor(DcMotor.class),
 
-    distanceSensor(Rev2mDistanceSensor.class), ;
+    distanceSensor(Rev2mDistanceSensor.class),
+
+    latchExtenderLimitSwitch(RevTouchSensor.class);
 
     private Class<? extends HardwareDevice> _partType;
 

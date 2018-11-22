@@ -11,16 +11,17 @@ public class DrivingOpMode extends OpMode {
 
     private static final double BRUSH_STOP = 0;
     private static final double BRUSH_GO = 1.0;
-    public static final double LATCH_POWER = 0.5;
 
 
     private DcMotor leftMotor;
     private DcMotor rightMotor;
-    private DcMotor latchLiftMotor;
+    private LatchExtender latchExtender;
     private DcMotor armExtenderMotor;
     private DcMotor armLiftingMotor;
-    private DcMotor latchLowerMotor;
+
     private DcMotor brushMotor;
+
+    private boolean isReverseDriving = false;
 
     @Override
     public void init() {
@@ -36,13 +37,7 @@ public class DrivingOpMode extends OpMode {
         brushMotor.setPower(BRUSH_STOP);
 
 
-        latchLiftMotor = RobotPart.latchLiftMotor.getInstance(hardwareMap);
-        latchLiftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        latchLiftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        latchLowerMotor = RobotPart.latchLowerMotor.getInstance(hardwareMap);
-        latchLowerMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        latchLowerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        latchExtender = new LatchExtender(hardwareMap, telemetry);
 
         armExtenderMotor = RobotPart.armExtenderMotor.getInstance(hardwareMap);
         armExtenderMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -70,13 +65,8 @@ public class DrivingOpMode extends OpMode {
     }
 
     private void doLatchLiftMotor() {
-
-        latchLiftMotor.setPower(gamepad1.right_trigger);
-        latchLowerMotor.setPower(gamepad1.right_trigger);
-
-        latchLiftMotor.setPower(-gamepad1.left_trigger);
-        latchLowerMotor.setPower(-gamepad1.left_trigger);
-
+        latchExtender.pullUp(gamepad1.right_trigger);
+        latchExtender.rollDown(gamepad1.left_trigger);
     }
 
 
@@ -91,9 +81,25 @@ public class DrivingOpMode extends OpMode {
 
     private void doDriving() {
 
-        leftMotor.setPower(gamepad1.left_stick_y);
 
-        rightMotor.setPower(gamepad1.right_stick_y);
+        if (gamepad1.a) {
+            isReverseDriving = false;
+        } else if (gamepad1.b) {
+            isReverseDriving = true;
+        }
+
+        float leftMotorPower = gamepad1.left_stick_y;
+        float rightMotorPower = gamepad1.right_stick_y;
+
+
+        // if is reverse driving, switch controls
+        if (isReverseDriving) {
+            leftMotorPower = -gamepad1.right_stick_y;
+            rightMotorPower = -gamepad1.left_stick_y;
+        }
+
+        leftMotor.setPower(leftMotorPower);
+        rightMotor.setPower(rightMotorPower);
 
 
     }

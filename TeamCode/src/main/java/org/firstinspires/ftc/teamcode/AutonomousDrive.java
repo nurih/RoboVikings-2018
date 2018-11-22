@@ -76,6 +76,7 @@ class AutonomousDrive {
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor.setDirection(direction);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor.setTargetPosition(motor.getCurrentPosition());
         motor.setPower(.5);
     }
 }

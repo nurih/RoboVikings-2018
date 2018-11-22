@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "Test Motor Encoder")
+@Autonomous(name = "Test Motor Encoder", group = "Test")
 public class TestEncoderOpMode extends LinearOpMode {
 
     public static final int STOP_MOTOR = 0;
