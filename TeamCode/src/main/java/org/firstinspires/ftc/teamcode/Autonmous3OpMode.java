@@ -4,7 +4,7 @@ import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "Autonomous 3 Unwind Motor")
+@Autonomous(name = "Autonomous3 Off Da Hook")
 public class Autonmous3OpMode extends LinearOpMode {
 
     AutonomousDrive drive;
@@ -19,10 +19,6 @@ public class Autonmous3OpMode extends LinearOpMode {
 
         drive = new AutonomousDrive(hardwareMap, telemetry);
 
-
-        sleep(3000);
-        telemetry.addLine("turning");
-
         // unwind lowering motor.
         double startTime = getRuntime();
         while (timeToStop(startTime) == false) {
@@ -31,10 +27,14 @@ public class Autonmous3OpMode extends LinearOpMode {
         latchExtender.stop();
         telemetry.addLine("Got down");
         telemetry.update();
-        sleep(3000);
+        sleep(1000);
 
-        drive.turn(45);
+        drive.turn(-45);
         telemetry.addLine("turned");
+        telemetry.update();
+
+        drive.driveStraight(30);
+        telemetry.addLine("left lander");
         telemetry.update();
     }
 
@@ -44,7 +44,7 @@ public class Autonmous3OpMode extends LinearOpMode {
         if(isStopRequested()){ return true;}
 
         // if passed time
-        if( getRuntime() >= startTime + 4) { return true;}
+        if( getRuntime() >= startTime + 6) { return true;}
 
         // if reached limit switch
         return touchSensor.isPressed();
