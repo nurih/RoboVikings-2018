@@ -37,7 +37,7 @@ public class Autonmous4OpMode extends LinearOpMode {
         telemetry.addLine("turned");
         telemetry.update();
         drive.driveStraight(10);
-        drive.turn(10);
+        drive.turn(18);
 
         drive.driveStraight(264);
         telemetry.addLine("left lander");
