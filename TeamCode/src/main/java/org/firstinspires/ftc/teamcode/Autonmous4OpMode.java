@@ -33,7 +33,7 @@ public class Autonmous4OpMode extends LinearOpMode {
         telemetry.update();
         sleep(1000);
 
-        drive.turn(-25);
+        drive.turn(-28);
         telemetry.addLine("turned");
         telemetry.update();
         drive.driveStraight(10);
@@ -54,7 +54,7 @@ public class Autonmous4OpMode extends LinearOpMode {
         if(isStopRequested()){ return true;}
 
         // if passed time
-        if( getRuntime() >= startTime + 9) { return true;}
+        if( getRuntime() >= startTime + 10.5) { return true;}
 
         // if reached limit switch
         return touchSensor.isPressed();

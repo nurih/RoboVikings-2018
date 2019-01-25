@@ -66,7 +66,7 @@ public class DrivingOpMode extends OpMode {
 
     private void doLatchLiftMotor() {
         if (gamepad1.right_bumper) {
-            latchExtender.pullUp();
+            latchExtender.pullUp(1);
         }
         if(gamepad1.left_bumper){
             latchExtender.rollDown();
