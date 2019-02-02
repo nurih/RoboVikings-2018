@@ -54,7 +54,7 @@ public class Autonmous4OpMode extends LinearOpMode {
         if(isStopRequested()){ return true;}
 
         // if passed time
-        if( getRuntime() >= startTime + 10.5) { return true;}
+        if( getRuntime() >= startTime + 11.5) { return true;}
 
         // if reached limit switch
         return touchSensor.isPressed();
