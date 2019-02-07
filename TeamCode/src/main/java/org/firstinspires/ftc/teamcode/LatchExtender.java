@@ -9,13 +9,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class LatchExtender {
 
     private static final float LATCH_POWER = 0.5f;
-    private final HardwareMap hardwareMap;
     private final Telemetry telemetry;
 
     private DcMotor latchLiftMotor;
 
     public LatchExtender(HardwareMap hardwareMap, Telemetry telemetry) {
-        this.hardwareMap = hardwareMap;
         this.telemetry = telemetry;
 
         latchLiftMotor = RobotPart.latchLiftMotor.getInstance(hardwareMap);
