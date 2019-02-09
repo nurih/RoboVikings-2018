@@ -9,9 +9,10 @@ public class TestMotorEncoderOpMode extends OpMode {
     @Override
     public void init() {
         latchMotor = RobotPart.latchLiftMotor.getInstance(hardwareMap);
+        latchMotor.setPower(0);
         latchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         latchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        latchMotor.setPower(0);
+
 
     }
 

@@ -21,8 +21,6 @@ public enum RobotPart {
 
     brushMotor(DcMotor.class),
 
-    distanceSensor(Rev2mDistanceSensor.class),
-
     latchExtenderLimitSwitch(RevTouchSensor.class),
 
     markerServo(Servo.class);
